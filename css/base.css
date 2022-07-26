@@ -1,0 +1,34 @@
+:root {
+   --popular-blue:#B6D0E2; 
+   --scary-green: #097969;
+   --adventure-red:#8B0000;
+   --romance-pink: #FFB6C1;
+   --animation-yellow:#FBEC5D;
+   --font-light: #CCCCCC; 
+   --font-dark: #333333;
+}
+
+h1,
+h2,
+h3,
+h4 {
+   margin-top: 0.25rem;
+   margin-bottom: 0.5rem;
+}
+
+li {
+   list-style: none;
+}
+
+.container {
+   padding-left: 15px;
+   padding-right: 15px;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+
+.box-card .is-popular {
+   border: 5px var(--popular-blue) solid;
+}
+
