@@ -6,7 +6,7 @@ const containerCollection = document.querySelector('.collection-container');
 
 const collection = document.querySelectorAll('.collection');
 
-const boxOfLines = document.querySelector('.box-lines');
+/* const boxOfLines = document.querySelector('.box-lines'); */
 
 const aToZLine = document.querySelectorAll('.a-to-z');
 
@@ -82,7 +82,6 @@ Promise
    .then((data) => {
       // const [movie1, movie2]= data;
       // console.log(data);
-
       Object.entries(data).map((item) => {
          // console.log(item[1].original_title);
          collectionContainer(item);
@@ -180,29 +179,42 @@ function unfavoriteCards(unfavorite) {
 
 function aToZee() {
    const boxOfLines = document.querySelectorAll('.box-lines');
-   console.log(boxOfLines);
+
+   // console.log(boxOfLines, 'box of lines');
    ascendingCollection.addEventListener('click', function() {
          
-         /* Object.entries(boxOfLines).map(elm => {
-            console.log(elm[1].dataset.title);
+/*       Object.entries(boxOfLines).map(elm => {
+         console.log(elm[1].dataset.title, 'dataset title');
+      }) */
+
+      // i know that I have to find a way filter the first letter of the title for each card
+      //then i need to sort the first letter of each card to alphabetical order
+      //at the same time, the cards move as well with the alphabetical order
+
+      let stuff =Object.entries(boxOfLines)
+      .split(dataset.title[0]);
+/*       .filter()
+      .sort(function compare(a, b) {
+         if (a[1].dataset.title > b[1].dataset.title) {
+            console.log(a[1].dataset.title[0], 'a');
+            console.log(b[1].dataset.title[0], 'b');
+            return -1;
+         }
+         else if (a[1].dataset.title < b[1].dataset.title) {
+            console.log(a[1].dataset.title[0], 'a.2');
+            console.log(b[1].dataset.title[0], 'b.2');
+            return 1;
+         }
+         // a must be equal to b
+         return 0;
          }) */
-
-         Object.entries(boxOfLines).sort(function compare(a, b) {
-            if (a[1].dataset.title > b[1].dataset.title) {
-              return -1;
-            }
-            else if (a[1].dataset.title < b[1].dataset.title) {
-              return 1;
-            }
-            // a must be equal to b
-            return 0;
-          })
-          console.log(boxOfLines);
-
-      })
+         // Object.entries(boxOfLines).sort();
+         // console.log(boxOfLines, 'box of lines');
+   })
 }
 
-// aToZee()
+
+
 
 //adding data open to the css favorites
 /* const openFavorite = '.[data-open]'
