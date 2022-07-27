@@ -82,11 +82,12 @@ Promise
    .then((data) => {
       // const [movie1, movie2]= data;
       // console.log(data);
+
       Object.entries(data).map((item) => {
          // console.log(item[1].original_title);
          collectionContainer(item);
-         // aToZee(item[1].original_title);
       })
+      aToZee();
    })
 }
 
@@ -109,6 +110,7 @@ function collectionContainer(item) {
    const unfavoriteDescription = document.createElement('span');
 
    boxLines.setAttribute('class', 'box-lines');
+   boxLines.setAttribute('data-title', `${title}`);
    boxCards.setAttribute('class', 'box-card');
    movieImage.setAttribute('src', `${secureBase + imageSize + img}`);
    movieImage.setAttribute('alt', 'Movie Image');
@@ -143,6 +145,7 @@ function collectionContainer(item) {
    unfavoriteCards(unfavoriteBox);
 
    // aToZee(movieName);
+   
 }
 
 
@@ -176,21 +179,30 @@ function unfavoriteCards(unfavorite) {
 }
 
 function aToZee() {
-
+   const boxOfLines = document.querySelectorAll('.box-lines');
+   console.log(boxOfLines);
    ascendingCollection.addEventListener('click', function() {
-         // nameOfMovie.sort();
-         // console.log(nameOfMovie, 'name of movie');
-         // boxOfLines.map((item) => console.log(item));
-         console.log(boxOfLines);
+         
+         /* Object.entries(boxOfLines).map(elm => {
+            console.log(elm[1].dataset.title);
+         }) */
 
+         Object.entries(boxOfLines).sort(function compare(a, b) {
+            if (a[1].dataset.title > b[1].dataset.title) {
+              return -1;
+            }
+            else if (a[1].dataset.title < b[1].dataset.title) {
+              return 1;
+            }
+            // a must be equal to b
+            return 0;
+          })
+          console.log(boxOfLines);
 
       })
-
-   // console.log(containerCollection);
-
 }
 
-aToZee()
+// aToZee()
 
 //adding data open to the css favorites
 /* const openFavorite = '.[data-open]'
