@@ -6,11 +6,17 @@ const containerCollection = document.querySelector('.collection-container');
 
 const collection = document.querySelectorAll('.collection');
 
-/* const boxOfLines = document.querySelector('.box-lines'); */
+// const boxOfLines = document.querySelector('.box-lines');
 
 const aToZLine = document.querySelectorAll('.a-to-z');
 
 const ascendingCollection = document.getElementById('c-asc');
+
+const descendingCollection = document.getElementById('c-desc');
+
+const ascendingFavCollect = document.getElementById('f-asc');
+
+const descendingFavCollect = document.getElementById('f-desc')
 
 const zToALine = document.querySelectorAll('.z-to-a');
 
@@ -87,10 +93,14 @@ Promise
          collectionContainer(item);
       })
       aToZee();
+      zeeToA();
+      aToZeeFav()
+      zeeToAFav()
    })
 }
 
 movieInput();
+// aToZee(boxOfLines);
 
 //this builds the HTML items from data 
 function collectionContainer(item) {
@@ -178,49 +188,185 @@ function unfavoriteCards(unfavorite) {
 }
 
 function aToZee() {
-   const boxOfLines = document.querySelectorAll('.box-lines');
 
-   // console.log(boxOfLines, 'box of lines');
+   const parentHolder = document.querySelector('.collection-container');
+
    ascendingCollection.addEventListener('click', function() {
-         
-/*       Object.entries(boxOfLines).map(elm => {
-         console.log(elm[1].dataset.title, 'dataset title');
-      }) */
 
-      // i know that I have to find a way filter the first letter of the title for each card
-      //then i need to sort the first letter of each card to alphabetical order
-      //at the same time, the cards move as well with the alphabetical order
+   let way = 'asc';
 
-      let stuff =Object.entries(boxOfLines)
-      .split(dataset.title[0]);
-/*       .filter()
-      .sort(function compare(a, b) {
-         if (a[1].dataset.title > b[1].dataset.title) {
-            console.log(a[1].dataset.title[0], 'a');
-            console.log(b[1].dataset.title[0], 'b');
+   console.log(parentHolder.childNodes);
+
+   let arrayItems = [];
+   parentHolder.childNodes.forEach((item) => {
+      if (item.nodeType === 1) {
+         arrayItems.push(item)
+      } else {
+         return 0;
+      }
+   })
+   if (way === 'asc') {
+      arrayItems.sort(function (a, b) { 
+         if (a.dataset.title === b.dataset.title) {
+            return 0;
+         } else if (a.dataset.title > b.dataset.title) {
+            return 1;
+         } else {
             return -1;
          }
-         else if (a[1].dataset.title < b[1].dataset.title) {
-            console.log(a[1].dataset.title[0], 'a.2');
-            console.log(b[1].dataset.title[0], 'b.2');
+      });
+   } else {
+      arrayItems.sort(function (a, b) {
+         if (a.dataset.title === b.dataset.title) {
+            return 0;
+         } else if (a.dataset.title < b.dataset.title) {
             return 1;
+         } else {
+            return -1;
          }
-         // a must be equal to b
-         return 0;
-         }) */
-         // Object.entries(boxOfLines).sort();
-         // console.log(boxOfLines, 'box of lines');
+      });
+   }
+
+   parentHolder.childNodes.forEach(item => item.remove());
+   
+   arrayItems.forEach(item => parentHolder.append(item));
    })
 }
 
+function zeeToA() {
+   const parentHolder = document.querySelector('.collection-container');
 
+   descendingCollection.addEventListener('click', function() {
 
+   let way = 'desc';
 
-//adding data open to the css favorites
-/* const openFavorite = '.[data-open]'
+   console.log(parentHolder.childNodes);
 
+   let arrayItems = [];
+   parentHolder.childNodes.forEach((item) => {
+      if (item.nodeType === 1) {
+         arrayItems.push(item)
+      } else {
+         return 0;
+      }
+   })
+   if (way === 'asc') {
+      arrayItems.sort(function (a, b) { 
+         if (a.dataset.title === b.dataset.title) {
+            return 0;
+         } else if (a.dataset.title > b.dataset.title) {
+            return 1;
+         } else {
+            return -1;
+         }
+      });
+   } else {
+      arrayItems.sort(function (a, b) {
+         if (a.dataset.title === b.dataset.title) {
+            return 0;
+         } else if (a.dataset.title < b.dataset.title) {
+            return 1;
+         } else {
+            return -1;
+         }
+      });
+   }
 
+   parentHolder.childNodes.forEach(item => item.remove());
+   
+   arrayItems.forEach(item => parentHolder.append(item));
 
-const favoriteOpen = document.querySelector(openFavorite);
+   })
+}
 
-const favoriteClose = document.querySelector('[data-close'); */
+function aToZeeFav() {
+   const parentHolder = document.querySelector('.favorite-container');
+
+   ascendingFavCollect.addEventListener('click', function() {
+
+   let way = 'asc';
+
+   console.log(parentHolder.childNodes);
+
+   let arrayItems = [];
+   parentHolder.childNodes.forEach((item) => {
+      if (item.nodeType === 1) {
+         arrayItems.push(item)
+      } else {
+         return 0;
+      }
+   })
+   if (way === 'asc') {
+      arrayItems.sort(function (a, b) { 
+         if (a.dataset.title === b.dataset.title) {
+            return 0;
+         } else if (a.dataset.title > b.dataset.title) {
+            return 1;
+         } else {
+            return -1;
+         }
+      });
+   } else {
+      arrayItems.sort(function (a, b) {
+         if (a.dataset.title === b.dataset.title) {
+            return 0;
+         } else if (a.dataset.title < b.dataset.title) {
+            return 1;
+         } else {
+            return -1;
+         }
+      });
+   }
+
+   parentHolder.childNodes.forEach(item => item.remove());
+   
+   arrayItems.forEach(item => parentHolder.append(item));
+
+   })
+}
+
+function zeeToAFav() {
+   const parentHolder = document.querySelector('.favorite-container');
+
+   descendingFavCollect.addEventListener('click', function() {
+
+   let way = 'desc';
+
+   console.log(parentHolder.childNodes);
+
+   let arrayItems = [];
+   parentHolder.childNodes.forEach((item) => {
+      if (item.nodeType === 1) {
+         arrayItems.push(item)
+      } else {
+         return 0;
+      }
+   })
+   if (way === 'asc') {
+      arrayItems.sort(function (a, b) { 
+         if (a.dataset.title === b.dataset.title) {
+            return 0;
+         } else if (a.dataset.title > b.dataset.title) {
+            return 1;
+         } else {
+            return -1;
+         }
+      });
+   } else {
+      arrayItems.sort(function (a, b) {
+         if (a.dataset.title === b.dataset.title) {
+            return 0;
+         } else if (a.dataset.title < b.dataset.title) {
+            return 1;
+         } else {
+            return -1;
+         }
+      });
+   }
+
+   parentHolder.childNodes.forEach(item => item.remove());
+   
+   arrayItems.forEach(item => parentHolder.append(item));
+
+   })
+}
