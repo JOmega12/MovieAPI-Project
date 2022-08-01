@@ -10,6 +10,8 @@ const collection = document.querySelectorAll('.collection');
 
 const aToZLine = document.querySelectorAll('.a-to-z');
 
+const zToALine = document.querySelectorAll('.z-to-a');
+
 const ascendingCollection = document.getElementById('c-asc');
 
 const descendingCollection = document.getElementById('c-desc');
@@ -18,7 +20,12 @@ const ascendingFavCollect = document.getElementById('f-asc');
 
 const descendingFavCollect = document.getElementById('f-desc')
 
-const zToALine = document.querySelectorAll('.z-to-a');
+
+const collectionListItem= document.querySelector('c-items')
+
+const favoriteListItem= document.querySelector('f-items')
+
+
 
 let secureBase = 'https://image.tmdb.org/t/p/';
 let imageSize = "original"
@@ -94,8 +101,10 @@ Promise
       })
       aToZee();
       zeeToA();
-      aToZeeFav()
-      zeeToAFav()
+      aToZeeFav();
+      zeeToAFav();
+
+      getListCollection();
    })
 }
 
@@ -370,3 +379,32 @@ function zeeToAFav() {
 
    })
 }
+
+function getListCollection() {
+   const parentHolder = document.querySelector('.collection-container');
+   
+   // Object.entries(parentHolder);
+
+   
+   console.log(parentHolder.childNodes);
+   
+   let counter = 30;
+   const totalCards = Number(Object.entries(parentHolder.childNodes).length - 1);
+
+/*    if(favoriteBox.addEventListener('click')) {
+      counter--
+   } else if (unfavoriteBox.addEventListener('click')) {
+      counter++
+   } */
+
+   console.log(totalCards);
+
+   //cards are in the container with counter = 30
+   //add to favorites button click
+   //card goes to favorite container Fcounter = 1, collection counter = 29 
+      //if add to favorite button click Ccounter - 1, else Fcounter unfavorite click FCounter - 1 in containter
+
+
+   /* document.querySelector('.c-items').innerHTML = `There are this many cards left: ${totalCards}` */
+}
+
