@@ -164,7 +164,8 @@ function collectionContainer(item) {
    // aToZee(movieName);
    // getListCollection(favoriteBox);
 
-   collectionClickCount(favoriteBox, unfavoriteBox);
+   collectionClickCount(favoriteBox);
+   favoriteClickCount(unfavoriteBox);
 }
 
 
@@ -175,7 +176,7 @@ function favoriteFilter(favorites) {
          //item.parentElement === descriptionbox
          //item.parentElement.parentElement === boxCard
          //item.parentElement.parentElement.parentElement === boxLines
-         console.log(item.parentElement.parentElement.parentElement.parentElement.parentElement);
+         // console.log(item.parentElement.parentElement.parentElement.parentElement.parentElement);
          if (item.parentElement.parentElement.parentElement.parentElement.parentElement.className === 'collection') {
             containerFavorite.append(item.parentElement.parentElement.parentElement)
          } 
@@ -434,33 +435,63 @@ function getListCollection() {
    // document.querySelector('.c-items').innerHTML = `There are this many cards left: ${totalCard.length}`
 }
 
-function collectionClickCount(favorites, unfav) {
+function collectionClickCount(favorites) {
    const parentHolder = document.querySelector('.collection-container');
+
+   const favParentHolder = document.querySelector('.favorite-container')
 
    const totalCards = Object.entries(parentHolder.childNodes).length - 1;
 
-   // collectionListItem.innerHTML= `There are this many ${totalCards} movies`;
+   const favTotalCards = Object.entries(favParentHolder.childNodes).length - 1;
 
+   collectionListItem.innerHTML= `There are this many movies: ${totalCards}`;
 
-   //why does this start from the beginning?
-   // is it after sorting, i get different numbers?
+   favoriteListItem.innerHTML= `There are this many movies: ${favTotalCards}`;   
 
    [favorites].forEach((item) => {
       item.addEventListener('click', function() {
-         favoriteListItem.innerHTML= `There are this many movies: ${totalCards}`;
+         const totalCards = Object.entries(parentHolder.childNodes).length;
+
+         const favTotalCards = Object.entries(favParentHolder.childNodes).length - 1;
+
+         collectionListItem.innerHTML= `There are this many movies: ${totalCards-1}`;
+
+         favoriteListItem.innerHTML= `There are this many movies: ${favTotalCards}`;
+
       })
    })
    
-
-/*    [unfav].forEach((item) => {
-      item.addEventListener('click', function() {
-         collectionListItem.innerHTML= `There are this many ${totalCards} movies`;
-      })
-   }) */
 }
 
-/* function favoriteClickCount(unfavorites) {
-   [unfavorites].addEventListener('click', function() {
 
+
+function favoriteClickCount(unfavorite) {
+   const parentHolder = document.querySelector('.collection-container');
+   
+   const favParentHolder = document.querySelector('.favorite-container')
+   
+   const totalCards = Object.entries(parentHolder.childNodes).length -1;
+
+   const favTotalCards = Object.entries(favParentHolder.childNodes).length - 1;
+
+
+   collectionListItem.innerHTML= `There are this many movies: ${totalCards}`;
+
+   favoriteListItem.innerHTML= `There are this many movies: ${favTotalCards}`;
+
+   [unfavorite].forEach((item) => {
+      item.addEventListener('click', function() {
+         // const totalCards = Object.entries(favParentHolder.childNodes).length - 1;
+         console.log(totalCards);
+         const favTotalCards = Object.entries(favParentHolder.childNodes).length - 1;
+
+         collectionListItem.innerHTML= `There are this many movies: ${totalCards}`;
+
+         favoriteListItem.innerHTML= `There are this many movies: ${favTotalCards}`;
+
+         console.log(totalCards, "tc");
+         console.log(favTotalCards, 'ftc');
+      })
    })
-} */
+   
+}
