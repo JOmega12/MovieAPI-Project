@@ -51,7 +51,7 @@
    display: flex;
    flex-wrap: wrap;
    padding: 0 1rem;
-   justify-content: center;
+   justify-content:space-evenly;
    max-width: 100%;
    width: 1800px;
    /* height: 100%; */
@@ -134,4 +134,14 @@
 }
 .unfavorite-box:hover {
    background-color: #b17d6c;
+}
+
+
+@media (max-width: 450px) {
+   .collection-container > *, .favorite-container >* {
+      display:inline-flex ;
+      flex-wrap: wrap;
+      flex: 50%;
+      flex-shrink: 1;
+   }
 }

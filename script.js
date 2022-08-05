@@ -6,8 +6,6 @@ const containerCollection = document.querySelector('.collection-container');
 
 const collection = document.querySelectorAll('.collection');
 
-// const boxOfLines = document.querySelector('.box-lines');
-
 const aToZLine = document.querySelectorAll('.a-to-z');
 
 const zToALine = document.querySelectorAll('.z-to-a');
@@ -24,15 +22,12 @@ const collectionListItem= document.querySelector('.c-items')
 
 const favoriteListItem= document.querySelector('.f-items')
 
-
-
 let secureBase = 'https://image.tmdb.org/t/p/';
-let imageSize = "original"
+let imageSize = "w500"
+
+
+
 //movie apis
-
-
-
-
 let movies = [
    //1
    fetch('https://api.themoviedb.org/3/movie/76341?api_key=01644eea1dc43bc65a5768e78715c02e'),
@@ -101,14 +96,11 @@ Promise
       })
       generateFavButton()
 
-      // getListCollection();
-
    })
    
 }
 
 movieInput();
-// aToZee(boxOfLines);
 
 //this builds the HTML items from data 
 function collectionContainer(item) {
@@ -155,17 +147,13 @@ function collectionContainer(item) {
    boxCards.appendChild(descriptionBox);
    boxLines.appendChild(boxCards);
 
-
    containerCollection.appendChild(boxLines);
 
    favoriteFilter(favoriteBox);
    unfavoriteCards(unfavoriteBox);
 
-   // aToZee(movieName);
-   // getListCollection(favoriteBox);
-
-   collectionClickCount(favoriteBox);
-   favoriteClickCount(unfavoriteBox);
+   collectionClickCounter(favoriteBox);
+   collectionClickCounter(unfavoriteBox);
 }
 
 
@@ -198,6 +186,7 @@ function unfavoriteCards(unfavorite) {
    })
 }
 
+// creates favorites click
 function aToZee() {
 
    const parentHolder = document.querySelector('.collection-container');
@@ -391,107 +380,26 @@ function generateFavButton() {
 }
 
 
-function getListCollection() {
-   const parentHolder = document.querySelector('.collection-container');
-
-   console.log(parentHolder.childNodes, 'pholder child nodes');
-   
-   let counter = 30;
-   const totalCards = Object.entries(parentHolder.childNodes).length - 1;
-
-   // console.log(collectionListItem);
-
-   //this helps logout the how many movie numbers                           
-   console.log(totalCards, 'total cards');
-
-   //this supports that i can subtract the number of cards
-   console.log(totalCards -1, 'total cards');
-
-   collectionListItem.innerHTML= `There are this many ${totalCards} movies`;
-   
-/*    for (let i = 30; i<= 30; i--) {
-      favoriteFilter.addEventListener('click', function() {
-         console.log(i);
-      })
-   } */
-
-/*    collectionListItem.addEventListener('click', function() {
-      totalCards -1 
-   }) */
-
-/*    if(favoriteBox.addEventListener('click')) {
-      counter--
-   } else if (unfavoriteBox.addEventListener('click')) {
-      counter++
-   } */
-
-
-   //cards are in the container with counter = 30
-   //add to favorites button click
-   //card goes to favorite container Fcounter = 1, collection counter = 29 
-      //if add to favorite button click Ccounter - 1, else Fcounter unfavorite click FCounter - 1 in containter
-ß
-
-   // document.querySelector('.c-items').innerHTML = `There are this many cards left: ${totalCard.length}`
-}
-
-function collectionClickCount(favorites) {
-   const parentHolder = document.querySelector('.collection-container');
-
-   const favParentHolder = document.querySelector('.favorite-container')
-
-   const totalCards = Object.entries(parentHolder.childNodes).length - 1;
-
-   const favTotalCards = Object.entries(favParentHolder.childNodes).length - 1;
-
-   collectionListItem.innerHTML= `There are this many movies: ${totalCards}`;
-
-   favoriteListItem.innerHTML= `There are this many movies: ${favTotalCards}`;   
-
-   [favorites].forEach((item) => {
-      item.addEventListener('click', function() {
-         const totalCards = Object.entries(parentHolder.childNodes).length;
-
-         const favTotalCards = Object.entries(favParentHolder.childNodes).length - 1;
-
-         collectionListItem.innerHTML= `There are this many movies: ${totalCards-1}`;
-
-         favoriteListItem.innerHTML= `There are this many movies: ${favTotalCards}`;
-
-      })
-   })
-   
-}
-
-
-
-function favoriteClickCount(unfavorite) {
+//creates count collection of favorites
+function setCountCollections() {
    const parentHolder = document.querySelector('.collection-container');
    
    const favParentHolder = document.querySelector('.favorite-container')
-   
-   const totalCards = Object.entries(parentHolder.childNodes).length -1;
 
-   const favTotalCards = Object.entries(favParentHolder.childNodes).length - 1;
+   collectionListItem.innerHTML= `There are this many movies: ${parentHolder.childNodes.length - 1}`;
 
+   favoriteListItem.innerHTML= `There are this many movies: ${favParentHolder.childNodes.length - 1}`;
+}
 
-   collectionListItem.innerHTML= `There are this many movies: ${totalCards}`;
-
-   favoriteListItem.innerHTML= `There are this many movies: ${favTotalCards}`;
-
-   [unfavorite].forEach((item) => {
+function setCounterEventListener(arr) {
+   [arr].forEach((item) => {
       item.addEventListener('click', function() {
-         // const totalCards = Object.entries(favParentHolder.childNodes).length - 1;
-         console.log(totalCards);
-         const favTotalCards = Object.entries(favParentHolder.childNodes).length - 1;
-
-         collectionListItem.innerHTML= `There are this many movies: ${totalCards}`;
-
-         favoriteListItem.innerHTML= `There are this many movies: ${favTotalCards}`;
-
-         console.log(totalCards, "tc");
-         console.log(favTotalCards, 'ftc');
+         setCountCollections();
       })
    })
-   
+}
+
+function collectionClickCounter(arr) {
+   setCountCollections();
+   setCounterEventListener(arr);
 }
