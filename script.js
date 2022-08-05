@@ -20,10 +20,9 @@ const ascendingFavCollect = document.getElementById('f-asc');
 
 const descendingFavCollect = document.getElementById('f-desc')
 
+const collectionListItem= document.querySelector('.c-items')
 
-const collectionListItem= document.querySelector('c-items')
-
-const favoriteListItem= document.querySelector('f-items')
+const favoriteListItem= document.querySelector('.f-items')
 
 
 
@@ -98,14 +97,14 @@ Promise
       Object.entries(data).map((item) => {
          // console.log(item[1].original_title);
          collectionContainer(item);
+         
       })
-      aToZee();
-      zeeToA();
-      aToZeeFav();
-      zeeToAFav();
+      generateFavButton()
 
-      getListCollection();
+      // getListCollection();
+
    })
+   
 }
 
 movieInput();
@@ -163,7 +162,9 @@ function collectionContainer(item) {
    unfavoriteCards(unfavoriteBox);
 
    // aToZee(movieName);
-   
+   // getListCollection(favoriteBox);
+
+   collectionClickCount(favoriteBox, unfavoriteBox);
 }
 
 
@@ -240,6 +241,7 @@ function aToZee() {
    
    arrayItems.forEach(item => parentHolder.append(item));
    })
+
 }
 
 function zeeToA() {
@@ -380,16 +382,41 @@ function zeeToAFav() {
    })
 }
 
+function generateFavButton() {
+   aToZee();
+   zeeToA();
+   aToZeeFav();
+   zeeToAFav();
+}
+
+
 function getListCollection() {
    const parentHolder = document.querySelector('.collection-container');
-   
-   // Object.entries(parentHolder);
 
-   
-   console.log(parentHolder.childNodes);
+   console.log(parentHolder.childNodes, 'pholder child nodes');
    
    let counter = 30;
-   const totalCards = Number(Object.entries(parentHolder.childNodes).length - 1);
+   const totalCards = Object.entries(parentHolder.childNodes).length - 1;
+
+   // console.log(collectionListItem);
+
+   //this helps logout the how many movie numbers                           
+   console.log(totalCards, 'total cards');
+
+   //this supports that i can subtract the number of cards
+   console.log(totalCards -1, 'total cards');
+
+   collectionListItem.innerHTML= `There are this many ${totalCards} movies`;
+   
+/*    for (let i = 30; i<= 30; i--) {
+      favoriteFilter.addEventListener('click', function() {
+         console.log(i);
+      })
+   } */
+
+/*    collectionListItem.addEventListener('click', function() {
+      totalCards -1 
+   }) */
 
 /*    if(favoriteBox.addEventListener('click')) {
       counter--
@@ -397,14 +424,43 @@ function getListCollection() {
       counter++
    } */
 
-   console.log(totalCards);
 
    //cards are in the container with counter = 30
    //add to favorites button click
    //card goes to favorite container Fcounter = 1, collection counter = 29 
       //if add to favorite button click Ccounter - 1, else Fcounter unfavorite click FCounter - 1 in containter
+ß
 
-
-   /* document.querySelector('.c-items').innerHTML = `There are this many cards left: ${totalCards}` */
+   // document.querySelector('.c-items').innerHTML = `There are this many cards left: ${totalCard.length}`
 }
 
+function collectionClickCount(favorites, unfav) {
+   const parentHolder = document.querySelector('.collection-container');
+
+   const totalCards = Object.entries(parentHolder.childNodes).length - 1;
+
+   // collectionListItem.innerHTML= `There are this many ${totalCards} movies`;
+
+
+   //why does this start from the beginning?
+   // is it after sorting, i get different numbers?
+
+   [favorites].forEach((item) => {
+      item.addEventListener('click', function() {
+         favoriteListItem.innerHTML= `There are this many movies: ${totalCards}`;
+      })
+   })
+   
+
+/*    [unfav].forEach((item) => {
+      item.addEventListener('click', function() {
+         collectionListItem.innerHTML= `There are this many ${totalCards} movies`;
+      })
+   }) */
+}
+
+/* function favoriteClickCount(unfavorites) {
+   [unfavorites].addEventListener('click', function() {
+
+   })
+} */
